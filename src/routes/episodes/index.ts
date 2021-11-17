@@ -1,6 +1,7 @@
-import { Router } from "express";
+import { Router } from 'express';
+
 const router = Router();
 
-router.get("/episodes", (req, res) => res.json("epi"))
+router.get('/episodes', (req, res) => res.json('epi'));
 
 export default router;
