@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const graphqlFetch = async (url: string, endpoint: string, query?: string) => {
+const graphqlFetch = async (url: string, query?: string) => {
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify({ query }),
