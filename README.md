@@ -1,6 +1,6 @@
 <img src ="https://static.wikia.nocookie.net/wiki-de-rick-morty/images/6/60/Rick_and_Morty.png/revision/latest?cb=20210623034924&path-prefix=es"/>
 
-<h1>Challenge <i>made by Arian Cejas </i></h1>
+<h1>Challenge <i>made by Arian Cejas  </i> </h1> 
 
 
  ```
@@ -21,7 +21,7 @@
 
 <details>
 <summary>
-<b>How I run this application? 🤯</b>
+<b>How I 🏃 this application?</b>
 </summary>
 <br/>
 <h3>
@@ -48,15 +48,28 @@ or
 npm start
 ```
 <br/>
+<p> if everything its all right, in the terminal you will see ` "Running on port <i> **port setted in .env** </i>" ` </p>
+<br/>
+<h3><b>...or directly, test it with:</b></h3>
+<br/>
 
-<p> if everything its all right, in the terminal you will see <b>"Running on port <i> **port setted in .env** </i>" </b></p>
+```
+npm test
+```
+or
+```
+yarn test
+```
+<br/>
+
+ `then open the terminal and see the magic!`
+
 <br/>
 </details>
 
-
 <details>
 <summary>
-<b> Da routes </b>
+<b> Da routes 📡 </b>
 
 </summary>
 <br/>
@@ -67,6 +80,7 @@ npm start
 |----|-----|-------|  
 |GET|_/char_|**How much times the first letter of the resource appears in all the elements (of that resource)**|
 |GET|_/episodes_|**A episodes list with its name, episode, and an array with all the origin names (locations) of all the characters that appears in that episode**|
+|GET|_/all_|**Both routes of above**|
 
 </details>
 <br/>
