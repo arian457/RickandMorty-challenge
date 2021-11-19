@@ -1,9 +1,9 @@
-import { characterCountData, graphqlResponseObject, resultsObject } from '../interfaces';
+import { charCountResult, graphqlResponseObject, resultsObject } from '../interfaces';
 
-const dataCharacterGenerator = (object: Array<graphqlResponseObject>, resource: string)
-  : characterCountData => {
+const dataCharGenerator = (object: Array<graphqlResponseObject>, resource: string)
+  : charCountResult => {
   const nameArr: string[] = [];
-  const charObject: characterCountData = {
+  const charObject: charCountResult = {
     char: resource[0],
     count: 0,
     resource,
@@ -21,4 +21,4 @@ const dataCharacterGenerator = (object: Array<graphqlResponseObject>, resource: 
   return charObject;
 };
 
-export default dataCharacterGenerator;
+export default dataCharGenerator;

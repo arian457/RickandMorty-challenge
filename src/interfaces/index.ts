@@ -1,4 +1,4 @@
-export interface characterCountData {
+export interface charCountResult {
   char: string;
   count: number;
   resource: string;
@@ -26,11 +26,11 @@ export interface episodesLocationData {
   locations?: string[];
 }
 
-interface originCharacterObject {
+interface originCharObject {
   name:string
  }
-export interface characterObject {
-  origin?: originCharacterObject;
+export interface charObject {
+  origin?: originCharObject;
   location?: object[];
 }
 

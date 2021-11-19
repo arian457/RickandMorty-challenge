@@ -1,5 +1,5 @@
 import {
-  graphqlResponseObject, episodesLocationData, resultsObject, characterObject,
+  graphqlResponseObject, episodesLocationData, resultsObject, charObject,
 } from '../interfaces';
 
 const dataEpisodesGenerator = (object: graphqlResponseObject):episodesLocationData[] => {
@@ -9,7 +9,7 @@ const dataEpisodesGenerator = (object: graphqlResponseObject):episodesLocationDa
     const { name, episode, characters } = ep;
     const episodesObj: episodesLocationData = {};
     const originNames: string[] = [];
-    characters.forEach((char: characterObject) => {
+    characters.forEach((char: charObject) => {
       const originName = char.origin.name;
       if (!originNames.includes(originName)) originNames.push(originName);
     });
