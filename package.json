@@ -2,11 +2,11 @@
   "name": "chipax-challenge",
   "version": "1.0.0",
   "description": "algorithms for process and calculate statistics for API ()\u001b[Drick and morty)\u001b[A\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[Cing \u001b[2~ \u001b[Da\u001b[\u001b[2~ and calculate statisticks for api ()\u001b[Drick and morty)\u001b[A\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[\u001b[C\u001bs",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
   "scripts": {
     "build": "tsc",
     "start": "tsc & node .",
-    "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\"",
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\"",
     "test": "jest"
   },
   "jest": {
@@ -19,6 +19,8 @@
   "author": "Arian Cejas",
   "license": "ISC",
   "dependencies": {
+    "@types/jest": "^27.0.3",
+    "@types/supertest": "^2.0.11",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
