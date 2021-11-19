@@ -1,16 +1,21 @@
 import { NextFunction, Request, Response } from 'express';
+import arraysConcat from '../utils/arraysConcat';
 import dataEpisodesGenerator from '../services/episodes';
 import promiseConcats from '../utils/PromisesConcats';
+import { episodesLocationData, graphqlResponseObject } from '../interfaces';
 
-const graphqlUrl = 'https://rickandmortyapi.com/graphql';
+require('dotenv').config();
+
+const { API_URL } = process.env;
 
 const episodesLocationsController = async (req: Request, res: Response, next: NextFunction) => {
-  const start: Date = new Date();
+  const start: number = new Date().getTime();
   try {
-    promiseConcats('episodes', graphqlUrl, 'name \n episode  \n characters{\n  origin{name}\n  }\n')
-      .then((values) => values.map((r) => dataEpisodesGenerator(r)))
-      .then((data) => {
-        const end: Date = new Date();
+    promiseConcats('episodes', API_URL, 'name \n episode  \n characters{\n  origin{name}\n  }\n')
+      .then((response: Array<graphqlResponseObject>) => response.map((page
+        : graphqlResponseObject):episodesLocationData[] => dataEpisodesGenerator(page)))
+      .then((formattedData) => {
+        const end: number = new Date().getTime();
         const diff: string = (start - end).toString();
         const seconds = diff.slice(1, 2);
         const miliseconds = diff.slice(2);
@@ -18,7 +23,7 @@ const episodesLocationsController = async (req: Request, res: Response, next: Ne
           exercise_name: 'Episode locations',
           time: `${seconds}s ${miliseconds}ms`,
           in_time: parseInt(seconds, 16) < 3,
-          results: data,
+          results: arraysConcat(formattedData),
         });
       });
   } catch (error) {
