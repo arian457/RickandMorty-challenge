@@ -1,21 +1,23 @@
-import { graphqlResponseObject, episodesLocationData } from '../interfaces';
+import {
+  graphqlResponseObject, episodesLocationData, resultsObject, characterObject,
+} from '../interfaces';
 
-const dataEpisodesGenerator = (object: Array<graphqlResponseObject>) => {
-  const resultsArray: object[] = [];
-  const { results } = object.data.episodes;
-  results.forEach((ep) => {
+const dataEpisodesGenerator = (object: graphqlResponseObject):episodesLocationData[] => {
+  const episodesArray: episodesLocationData[] = [];
+  const { results }:any = object.data.episodes;
+  results.forEach((ep: resultsObject) => {
     const { name, episode, characters } = ep;
-    const originObj: episodesLocationData = {};
-    const locationsNames: string[] = [];
-    characters.forEach((char) => {
-      const { name } = char.origin;
-      if (!locationsNames.includes(name)) locationsNames.push(name);
+    const episodesObj: episodesLocationData = {};
+    const originNames: string[] = [];
+    characters.forEach((char: characterObject) => {
+      const originName = char.origin.name;
+      if (!originNames.includes(originName)) originNames.push(originName);
     });
-    originObj.name = name;
-    originObj.episode = episode;
-    originObj.locations = locationsNames;
-    resultsArray.push(originObj);
+    episodesObj.name = name;
+    episodesObj.episode = episode;
+    episodesObj.locations = originNames;
+    episodesArray.push(episodesObj);
   });
-  return resultsArray;
+  return episodesArray;
 };
 export default dataEpisodesGenerator;
