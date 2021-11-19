@@ -1,21 +1,23 @@
 import { NextFunction, Request, Response } from 'express';
 import promiseConcats from '../utils/PromisesConcats';
 import { graphqlResponseObject, characterCountData } from '../interfaces';
-import dataObjectGenerator from '../services/characters';
+import dataCharacterGenerator from '../services/characters';
 
-const graphqlUrl = 'https://rickandmortyapi.com/graphql';
+require('dotenv').config();
+
+const { API_URL } = process.env;
 
 const characterCounterController = (req: Request, res: Response, next: NextFunction) => {
-  const start: Date = new Date();
+  const start = new Date().getTime();
   try {
-    const locations = promiseConcats('locations', graphqlUrl, 'name \n').then(
-      (values: graphqlResponseObject): characterCountData => dataObjectGenerator(values, 'locations'));
-    const characters = promiseConcats('characters', graphqlUrl, 'name \n').then(
-      (values: graphqlResponseObject): characterCountData => dataObjectGenerator(values, 'characters'));
-    const episodes = promiseConcats('episodes', graphqlUrl, 'name \n').then(
-      (values: graphqlResponseObject): characterCountData => dataObjectGenerator(values, 'episodes'));
+    const locations = promiseConcats('locations', API_URL, 'name \n')
+      .then((response: graphqlResponseObject[]): characterCountData => dataCharacterGenerator(response, 'locations'));
+    const characters = promiseConcats('characters', API_URL, 'name \n')
+      .then((response: graphqlResponseObject[]): characterCountData => dataCharacterGenerator(response, 'characters'));
+    const episodes = promiseConcats('episodes', API_URL, 'name \n')
+      .then((response: graphqlResponseObject[]): characterCountData => dataCharacterGenerator(response, 'episodes'));
     Promise.all([locations, characters, episodes]).then((values) => {
-      const end: Date = new Date();
+      const end = new Date().getTime();
       const diff: string = (start - end).toString();
       const seconds = diff.slice(1, 2);
       const miliseconds = diff.slice(2);
