@@ -3,13 +3,38 @@ export interface characterCountData {
   count: number;
   resource: string;
 }
-export interface graphqlResponseObject {
-  data: object[];
-  [resource: string]: object[];
-  results: object[];
-}
-export interface episodesLocationData {
+
+export interface resultsObject {
   name: string;
   episode: string;
-  locations: string[];
+  characters: object[];
+}
+interface dataObject {
+  episodes?: resultsObject
+  locations?: resultsObject
+  characters?: resultsObject
+
+}
+export interface graphqlResponseObject {
+  data:dataObject;
+  results: Array<resultsObject>;
+}
+
+export interface episodesLocationData {
+  name?: string;
+  episode?: string;
+  locations?: string[];
+}
+
+interface originCharacterObject {
+  name:string
+ }
+export interface characterObject {
+  origin?: originCharacterObject;
+  location?: object[];
+}
+
+export interface errorResponse{
+  status: number;
+  message: string;
 }
