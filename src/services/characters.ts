@@ -3,7 +3,7 @@ import { characterCountData, graphqlResponseObject, resultsObject } from '../int
 const dataCharacterGenerator = (object: Array<graphqlResponseObject>, resource: string)
   : characterCountData => {
   const nameArr: string[] = [];
-  const originObj: characterCountData = {
+  const charObject: characterCountData = {
     char: resource[0],
     count: 0,
     resource,
@@ -15,10 +15,10 @@ const dataCharacterGenerator = (object: Array<graphqlResponseObject>, resource: 
   nameArr.forEach((str: string) => {
     const regExp = new RegExp(resource[0], 'ig');
     const matches = (str.match(regExp) || []).length;
-    originObj.count += matches;
+    charObject.count += matches;
   });
 
-  return originObj;
+  return charObject;
 };
 
 export default dataCharacterGenerator;
