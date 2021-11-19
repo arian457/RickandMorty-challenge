@@ -1,6 +1,8 @@
-import fetch from 'node-fetch';
+import { graphqlResponseObject } from '../interfaces';
 
-const graphqlFetch = async (url: string, query?: string) => {
+const fetch = require('node-fetch');
+
+const graphqlFetch = async (url: string, query?: string):Promise<graphqlResponseObject> => {
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify({ query }),
