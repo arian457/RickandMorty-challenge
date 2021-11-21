@@ -1,21 +1,20 @@
 import { NextFunction, Request, Response } from 'express';
-import promiseConcats from '../utils/RequestUtils';
 import { graphqlResponseObject, charCountResult } from '../interfaces';
-import dataCharGenerator from '../services/char';
-
-require('dotenv').config();
-
-const { API_URL } = process.env;
+import { locationsService, episodesService, charactersService } from '../services';
+import { charData } from '../utils/dataFormatters';
 
 const charCounterController = (req: Request, res: Response, next: NextFunction) => {
   const start = new Date().getTime();
   try {
-    const locations = promiseConcats('locations', API_URL, 'name \n')
-      .then((response: graphqlResponseObject[]): charCountResult => dataCharGenerator(response, 'locations'));
-    const characters = promiseConcats('characters', API_URL, 'name \n')
-      .then((response: graphqlResponseObject[]): charCountResult => dataCharGenerator(response, 'characters'));
-    const episodes = promiseConcats('episodes', API_URL, 'name \n')
-      .then((response: graphqlResponseObject[]): charCountResult => dataCharGenerator(response, 'episodes'));
+    const locations = locationsService
+      .getAllLocations(['name'])
+      .then((response: graphqlResponseObject[]): charCountResult => charData(response, 'locations'));
+    const characters = charactersService
+      .getAllCharacters(['name'])
+      .then((response: graphqlResponseObject[]): charCountResult => charData(response, 'characters'));
+    const episodes = episodesService
+      .getAllEpisodes(['name'])
+      .then((response: graphqlResponseObject[]): charCountResult => charData(response, 'episodes'));
     Promise.all([locations, characters, episodes]).then((values) => {
       const end = new Date().getTime();
       const diff: string = (start - end).toString();
