@@ -1,20 +1,26 @@
 import { graphqlResponseObject } from '../interfaces';
 import graphqlFetch from './customFetchs';
 
-const promiseConcats = async (endpoint: string, url: string, fields?: string): Promise<object> => {
-  const fetchArray: object[] = [];
-  let i: number = 1;
-  const numPagesQuery: string = ` query{\n  ${endpoint}(page: 1) {\n    info {\n      pages\n    }\n  }}`;
-
-  const { data } = await graphqlFetch(url, numPagesQuery);
-  const resourcePages = data[endpoint].info?.pages;
-
-  while (resourcePages >= i) {
-    const resourcesQuery: string = ` query {\n  ${endpoint} (page: ${i} ) {\n  results {\n     ${fields}    }\n  }}`;
-    const promise: Promise<graphqlResponseObject> = graphqlFetch(url, resourcesQuery);
-    fetchArray.push(promise);
-    i += 1;
-  }
-  return Promise.all(fetchArray);
+const buildQuery = (endpoint: string, page: number, fields: string[]) => {
+  const resourcesQuery: string = ` query {\n  ${endpoint} (page: ${page} ) {\n  results {\n     ${fields}    }\n  }}`;
+  return resourcesQuery;
 };
-export default promiseConcats;
+const getAllResources = (url: string, totalPages: number, endpoint: string, fields: string[]) => {
+  const promisesArray: object[] = [];
+  let currentPage: number = 1;
+  while (totalPages >= currentPage) {
+    const query = buildQuery(endpoint, currentPage, fields);
+    const promise: Promise<graphqlResponseObject> = graphqlFetch(url, query);
+    promisesArray.push(promise);
+    currentPage += 1;
+  }
+  return Promise.all(promisesArray);
+};
+const getNumberOfPages = async (endpoint: string, url: string) => {
+  const numPagesQuery: string = ` query{\n  ${endpoint}(page: 1) {\n    info {\n      pages\n    }\n  }}`;
+  const { data } = await graphqlFetch(url, numPagesQuery);
+  const totalPages = data[endpoint].info?.pages;
+  return totalPages;
+};
+
+export { getAllResources, getNumberOfPages };
