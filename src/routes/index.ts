@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import charRoutes from './characters';
+import charRoutes from './char';
 import episodesRoutes from './episodes';
 
 const router = Router();
