@@ -80,7 +80,7 @@ yarn test
 |----|-----|-------|  
 |GET|_/char_|**How much times the first letter of the resource appears in all the elements (of that resource)**|
 |GET|_/episodes_|**A episodes list with its name, episode, and an array with all the origin names (locations) of all the characters that appears in that episode**|
-|GET|_/all_|**Both routes of above**|
+
 
 </details>
 <br/>
