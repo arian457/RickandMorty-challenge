@@ -20,7 +20,7 @@ const episodesLocationsController = async (req: Request, res: Response, next: Ne
         return res.json({
           exercise_name: 'Episode locations',
           time: `${seconds}s ${miliseconds}ms`,
-          in_time: taskStart - taskEnd - 0.5 < 3,
+          in_time: taskStart - taskEnd < 3,
           results: arraysConcat(formattedData),
         });
       });
