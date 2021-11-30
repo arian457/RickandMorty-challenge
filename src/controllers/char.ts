@@ -21,11 +21,10 @@ const charCounterController = (req: Request, res: Response, next: NextFunction) 
       const diff: string = (taskStart - responseTime - taskEnd).toString();
       const seconds = diff.slice(1, 2);
       const miliseconds = diff.slice(2, 5);
-
       return res.json({
         exercise_name: 'Char counter',
         time: `${seconds}s ${miliseconds}ms`,
-        in_time: parseInt(seconds, 16) < 3,
+        in_time: parseInt(diff, 16) < 3,
         results: values,
       });
     });
