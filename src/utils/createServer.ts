@@ -25,11 +25,6 @@ const createServer = (): Application => {
 
   server.use('/api/v1', serverRoutes);
 
-  server.use((err: any, res: Response) => {
-    const status = err.status || 500;
-    const message = err.message || err;
-    res.status(status).json(message);
-  });
   return server;
 };
 
