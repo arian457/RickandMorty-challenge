@@ -4,8 +4,8 @@ import { locationsService, episodesService, charactersService } from '../service
 import { charData } from '../utils/dataFormatters';
 
 const charCounterController = (req: Request, res: Response, next: NextFunction) => {
-  const start = new Date().getTime();
   try {
+    const taskStart = new Date().getTime();
     const locations = locationsService
       .getAllLocations(['name'])
       .then((response: graphqlResponseObject[]): charCountResult => charData(response, 'locations'));
@@ -15,11 +15,12 @@ const charCounterController = (req: Request, res: Response, next: NextFunction) 
     const episodes = episodesService
       .getAllEpisodes(['name'])
       .then((response: graphqlResponseObject[]): charCountResult => charData(response, 'episodes'));
+    const responseTime: number = 0.3;
     Promise.all([locations, characters, episodes]).then((values) => {
-      const end = new Date().getTime();
-      const diff: string = (start - end).toString();
+      const taskEnd = new Date().getTime();
+      const diff: string = (taskStart - responseTime - taskEnd).toString();
       const seconds = diff.slice(1, 2);
-      const miliseconds = diff.slice(2);
+      const miliseconds = diff.slice(2, 5);
 
       return res.json({
         exercise_name: 'Char counter',
